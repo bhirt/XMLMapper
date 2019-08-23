@@ -119,6 +119,14 @@ public final class XMLMap {
         return self
     }
     
+    public var lineNumber: Int? {
+        return self.XML[XMLParserConstant.Key.lineNumber] as? Int
+    }
+
+    public var columnNumber: Int? {
+        return self.XML[XMLParserConstant.Key.columnNumber] as? Int
+    }
+    
     public var innerText: XMLMap {
         return self[XMLParserConstant.Key.text]
     }

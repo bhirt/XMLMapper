@@ -32,12 +32,16 @@ extension XMLSerialization {
         public static let alwaysNodeName = ReadingOptions(rawValue: 1 << 12)
         public static let neverNodeName = ReadingOptions(rawValue: 1 << 13)
         
+        public static let alwaysLineNumbers = ReadingOptions(rawValue: 1 << 14)
+        public static let neverLineNumbers = ReadingOptions(rawValue: 1 << 15)
+
         public static let `default`: ReadingOptions = [
             .collapseTextNodes,
             .trimWhiteSpace,
             .keepNodesOrder,
             .prefixedAttributes,
             .alwaysNodeName,
+            .alwaysLineNumbers
         ]
     }
 }

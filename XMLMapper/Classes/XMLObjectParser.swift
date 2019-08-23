@@ -20,6 +20,11 @@ enum XMLObjectParserNodeNameMode {
     case never
 }
 
+enum XMLObjectParserLineNumberMode {
+    case always
+    case never
+}
+
 class XMLObjectParser: NSObject {
     
     // MARK: - Properties
@@ -33,6 +38,7 @@ class XMLObjectParser: NSObject {
     fileprivate var keepNodesOrder: Bool
     fileprivate var attributesMode: XMLObjectParserAttributesMode = .prefixed
     fileprivate var nodeNameMode: XMLObjectParserNodeNameMode = .always
+    fileprivate var lineNumberMode: XMLObjectParserLineNumberMode = .always
     
     fileprivate var root: NSMutableDictionary?
     fileprivate var stack: [NSMutableDictionary]?
@@ -94,6 +100,12 @@ class XMLObjectParser: NSObject {
         } else if options.contains(.neverNodeName) {
             nodeNameMode = .never
         }
+        
+        if options.contains(.alwaysLineNumbers) {
+            lineNumberMode = .always
+        } else if options.contains(.neverLineNumbers) {
+            lineNumberMode = .never
+        }
     }
     
     func endText() {
@@ -135,6 +147,14 @@ extension XMLObjectParser: XMLParserDelegate {
             }
         case .always:
             node[XMLParserConstant.Key.nodeName] = elementName
+        case .never:
+            break
+        }
+        
+        switch lineNumberMode {
+        case .always:
+            node[XMLParserConstant.Key.lineNumber] = parser.lineNumber
+            node[XMLParserConstant.Key.columnNumber] = parser.columnNumber
         case .never:
             break
         }

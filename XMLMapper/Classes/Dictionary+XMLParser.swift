@@ -15,6 +15,8 @@ extension Dictionary {
         } else {
             var filteredDict = dictionary
             let filteredKeys = [
+                XMLParserConstant.Key.lineNumber,
+                XMLParserConstant.Key.columnNumber,
                 XMLParserConstant.Key.comments,
                 XMLParserConstant.Key.text,
                 XMLParserConstant.Key.nodeName,
@@ -42,6 +44,8 @@ extension Dictionary {
     var childNodes: [String: Any]? {
         var filteredDict = self as? [String: Any]
         let filteredKeys = [
+            XMLParserConstant.Key.lineNumber,
+            XMLParserConstant.Key.columnNumber,
             XMLParserConstant.Key.attributes,
             XMLParserConstant.Key.comments,
             XMLParserConstant.Key.text,
@@ -59,6 +63,14 @@ extension Dictionary {
     
     var comments: [String]? {
         return (self as [AnyHashable: Any])[XMLParserConstant.Key.comments] as? [String]
+    }
+    
+    var lineNumber: Int? {
+        return (self as [AnyHashable: Any])[XMLParserConstant.Key.lineNumber] as? Int
+    }
+
+    var columnNumber: Int? {
+        return (self as [AnyHashable: Any])[XMLParserConstant.Key.columnNumber] as? Int
     }
     
     var nodeName: String? {
